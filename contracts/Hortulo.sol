@@ -9,16 +9,28 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Hortulo", "HORTULO") {}
+    string public baseURI;
 
-    function safeMint(address to, string memory uri) public onlyOwner {
+    constructor() ERC721("Hortulo", "HORTULO") {
+        setBaseURI(
+            "ipfs://ipfs.io/ipfs/QmZd7KPShj34GaqzUNSLVgWF7AYkvgRdktwhoFF5uJ1FQr"
+        );
+    }
+
+    function safeMint(address to) public onlyOwner {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+    }
+
+    function setBaseURI(string memory _newBaseURI) public onlyOwner {
+        baseURI = _newBaseURI;
+    }
+
+    function _baseURI() internal view override returns (string memory) {
+        return baseURI;
     }
 
     function _beforeTokenTransfer(
