@@ -15,7 +15,7 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     constructor() ERC721("Hortulo", "HORTULO") {
         setBaseURI(
-            "ipfs://ipfs.io/ipfs/QmZd7KPShj34GaqzUNSLVgWF7AYkvgRdktwhoFF5uJ1FQr"
+            "https://ipfs.io/ipfs/QmZd7KPShj34GaqzUNSLVgWF7AYkvgRdktwhoFF5uJ1FQr/"
         );
     }
 
