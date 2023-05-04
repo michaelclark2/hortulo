@@ -31,6 +31,10 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         baseURI = _newBaseURI;
     }
 
+    function setCost(uint256 _newCost) public onlyOwner {
+        cost = _newCost;
+    }
+
     function _baseURI() internal view override returns (string memory) {
         return baseURI;
     }

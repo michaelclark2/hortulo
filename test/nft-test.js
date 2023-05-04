@@ -12,7 +12,6 @@ describe("Hortulo", function () {
   this.beforeEach(async function () {
     const Hortulo = await ethers.getContractFactory("Hortulo");
     [owner, acc1, acc2] = await ethers.getSigners();
-
     myNFT = await Hortulo.deploy();
   });
 
