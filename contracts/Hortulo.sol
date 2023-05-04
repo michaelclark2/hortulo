@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -12,6 +12,7 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     string public baseURI;
+    uint256 public cost = 5 ether;
 
     constructor() ERC721("Hortulo", "HORTULO") {
         setBaseURI(
@@ -19,10 +20,11 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         );
     }
 
-    function safeMint(address to) public onlyOwner {
+    function mint(address _to) public payable {
+        require(msg.value >= cost, "Insufficient balance");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+        _safeMint(_to, tokenId);
     }
 
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
@@ -41,6 +43,8 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     ) internal override(ERC721, ERC721Enumerable) {
         super._beforeTokenTransfer(from, to, tokenId, batchSize);
     }
+
+    // The following functions are overrides required by Solidity.
 
     function _burn(
         uint256 tokenId

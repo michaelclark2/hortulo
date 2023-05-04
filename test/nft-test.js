@@ -23,8 +23,11 @@ describe("Hortulo", function () {
   it("Should mint one NFT", async function () {
     expect(await myNFT.balanceOf(acc1.address)).to.equal(0);
 
-    const tx = await myNFT.connect(owner).safeMint(acc1.address);
-    await tx.wait();
+    await expect(() =>
+      myNFT
+        .connect(acc1)
+        .mint(acc1.address, { value: ethers.utils.parseEther("5") })
+    ).to.changeEtherBalance(myNFT, ethers.utils.parseEther("5"));
 
     expect(await myNFT.balanceOf(acc1.address)).to.equal(1);
   });
