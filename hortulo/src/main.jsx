@@ -3,20 +3,21 @@ import ReactDOM from "react-dom/client";
 import App from "./app/App.jsx";
 import "./index.css";
 import "bulma/css/bulma.min.css";
+import { WagmiConfig, createClient } from "wagmi";
+import { ConnectKitProvider, getDefaultClient } from "connectkit";
 
-import { CeloProvider } from "@celo/react-celo";
-import "@celo/react-celo/lib/styles.css";
+const alchemyId = import.meta.env.ALCHEMY_ID;
+
+const client = createClient(
+  getDefaultClient({ appName: "Hortulo", alchemyId })
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CeloProvider
-      dapp={{
-        name: "Hortulo",
-        description: "Carbon offsets for mere mortals",
-        url: "https://hortulo.world",
-      }}
-    >
-      <App />
-    </CeloProvider>
+    <WagmiConfig client={client}>
+      <ConnectKitProvider>
+        <App />
+      </ConnectKitProvider>
+    </WagmiConfig>
   </React.StrictMode>
 );
