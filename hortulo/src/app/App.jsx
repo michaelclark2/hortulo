@@ -10,7 +10,6 @@ function App() {
   const { address, isConnecting, isDisconnected } = useAccount();
   return (
     <div className="App">
-      <Header />
       <RouterProvider router={router} />
     </div>
   );
