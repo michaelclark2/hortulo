@@ -39,7 +39,7 @@ describe("Hortulo", function () {
   it("Should mint one NFT", async function () {
     const mint = await hortulo
       .connect(acc1)
-      .mint(acc1.address, { value: ethers.utils.parseEther("0") });
+      .mint({ value: ethers.utils.parseEther("0") });
     await mint.wait();
     expect(await hortulo.ownerOf(0)).to.be.equal(acc1.address);
   });

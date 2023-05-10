@@ -29,11 +29,11 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         natureCarbonPoolToken = IToucanPoolToken(_natureCarbonPoolToken);
     }
 
-    function mint(address _to) public payable {
+    function mint() public payable {
         require(msg.value >= cost, "Insufficient balance");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(_to, tokenId);
+        _safeMint(msg.sender, tokenId);
     }
 
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
