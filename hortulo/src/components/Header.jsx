@@ -17,6 +17,9 @@ const Header = (props) => {
           <Navbar.Item renderAs={NavLink} to="/">
             Home
           </Navbar.Item>
+          <Navbar.Item renderAs={NavLink} to={"/garden"}>
+            Garden Explorer
+          </Navbar.Item>
           {isConnected ? (
             <>
               <Navbar.Item renderAs={NavLink} to="/mint">
@@ -25,16 +28,13 @@ const Header = (props) => {
               <Navbar.Item renderAs={NavLink} to={"/garden/" + address}>
                 My Garden
               </Navbar.Item>
-              <Navbar.Item renderAs={NavLink} to={"/garden"}>
-                Garden Explorer
-              </Navbar.Item>
             </>
           ) : null}
         </Navbar.Container>
         <Navbar.Container align="end">
           <Navbar.Item>
             <ConnectKitButton
-              label={isConnecting ? "Connecting..." : "Connect"}
+              label={isConnecting ? "Connecting..." : "Connect Wallet"}
             />
           </Navbar.Item>
         </Navbar.Container>
