@@ -1,7 +1,7 @@
 import { Heading } from "react-bulma-components";
 import Layout from "../components/Layout";
 
-const Home = (props) => {
+const HomePage = (props) => {
   return (
     <Layout>
       <div className="Home">
@@ -17,4 +17,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default HomePage;

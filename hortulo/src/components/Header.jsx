@@ -4,7 +4,7 @@ import { Heading, Navbar } from "react-bulma-components";
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
-  const { isConnecting } = useAccount();
+  const { address, isConnecting, isConnected } = useAccount();
   return (
     <Navbar>
       <Navbar.Brand>
@@ -15,10 +15,21 @@ const Header = (props) => {
       <Navbar.Menu>
         <Navbar.Container>
           <Navbar.Item renderAs={NavLink} to="/">
-            Mint
+            Home
           </Navbar.Item>
-          <Navbar.Item href="#">My Garden</Navbar.Item>
-          <Navbar.Item href="#">Garden Explorer</Navbar.Item>
+          {isConnected ? (
+            <>
+              <Navbar.Item renderAs={NavLink} to="/mint">
+                Mint
+              </Navbar.Item>
+              <Navbar.Item renderAs={NavLink} to={"/garden/" + address}>
+                My Garden
+              </Navbar.Item>
+              <Navbar.Item renderAs={NavLink} to={"/garden"}>
+                Garden Explorer
+              </Navbar.Item>
+            </>
+          ) : null}
         </Navbar.Container>
         <Navbar.Container align="end">
           <Navbar.Item>
