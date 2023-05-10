@@ -1,18 +1,17 @@
 import { useAccount } from "wagmi";
 import "./App.css";
-import { ConnectKitButton } from "connectkit";
-import { Button, Heading } from "react-bulma-components";
+import Header from "../components/Header";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "../pages/Home";
+
+const router = createBrowserRouter([{ path: "/", element: <Home /> }]);
 
 function App() {
   const { address, isConnecting, isDisconnected } = useAccount();
   return (
     <div className="App">
-      <Heading>Hortulo</Heading>
-      {address ? (
-        <div>Connected to {address}</div>
-      ) : (
-        <ConnectKitButton>Connect wallet</ConnectKitButton>
-      )}
+      <Header />
+      <RouterProvider router={router} />
     </div>
   );
 }
