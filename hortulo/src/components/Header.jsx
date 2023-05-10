@@ -22,11 +22,11 @@ const Header = (props) => {
           </Navbar.Item>
           {isConnected ? (
             <>
-              <Navbar.Item renderAs={NavLink} to="/mint">
-                Mint
-              </Navbar.Item>
               <Navbar.Item renderAs={NavLink} to={"/garden/" + address}>
                 My Garden
+              </Navbar.Item>
+              <Navbar.Item renderAs={NavLink} to="/mint">
+                Mint
               </Navbar.Item>
             </>
           ) : null}
