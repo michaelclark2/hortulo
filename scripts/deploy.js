@@ -7,8 +7,9 @@
 const hre = require("hardhat");
 
 async function main() {
+  const NCTaddress = "0xfb60a08855389F3c0A66b29aB9eFa911ed5cbCB5";
   const Hortulo = await hre.ethers.getContractFactory("Hortulo");
-  const hortulo = await Hortulo.deploy();
+  const hortulo = await Hortulo.deploy(NCTaddress);
 
   await hortulo.deployed();
 
