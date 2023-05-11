@@ -41,7 +41,6 @@ const Header = (props) => {
             showAvatar={false}
             theme="soft"
             label={isConnecting ? "Connecting..." : "Connect Wallet"}
-            options={{ avoidLayoutShift: false }}
           />
         </Navbar.Item>
       </Navbar.Container>
