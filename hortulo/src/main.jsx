@@ -20,7 +20,7 @@ const client = createClient(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <WagmiConfig client={client}>
-      <ConnectKitProvider>
+      <ConnectKitProvider options={{ avoidLayoutShift: false }}>
         <App />
       </ConnectKitProvider>
     </WagmiConfig>
