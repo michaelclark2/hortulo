@@ -9,14 +9,13 @@ const Header = (props) => {
     <Navbar>
       <Navbar.Brand>
         <Navbar.Item>
-          <Heading>Hortulo</Heading>
+          <NavLink to="/">
+            <Heading>Hortulo</Heading>
+          </NavLink>
         </Navbar.Item>
       </Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Container>
-          <Navbar.Item renderAs={NavLink} to="/">
-            Home
-          </Navbar.Item>
           <Navbar.Item renderAs={NavLink} to={"/garden"}>
             Garden Explorer
           </Navbar.Item>
