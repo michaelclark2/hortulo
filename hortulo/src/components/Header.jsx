@@ -34,6 +34,9 @@ const Header = (props) => {
         <Navbar.Container align="end">
           <Navbar.Item>
             <ConnectKitButton
+              showBalance
+              showAvatar={false}
+              theme="soft"
               label={isConnecting ? "Connecting..." : "Connect Wallet"}
             />
           </Navbar.Item>
