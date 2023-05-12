@@ -56,22 +56,19 @@ const GardenExplorerPage = (props) => {
                         setHasError(false);
                       }}
                     />
-                    {addressToSearch ? (
-                      <Form.Field.Body>
-                        <Form.Field>
-                          <Button
-                            my={3}
-                            size={"large"}
-                            color={"danger"}
-                            onClick={tryToNavigateToGarden}
-                          >
-                            Go
-                          </Button>
-                        </Form.Field>
-                      </Form.Field.Body>
-                    ) : (
-                      <></>
-                    )}
+
+                    <Form.Field.Body invisible={!addressToSearch}>
+                      <Form.Field>
+                        <Button
+                          my={3}
+                          size={"large"}
+                          color={"danger"}
+                          onClick={tryToNavigateToGarden}
+                        >
+                          Go
+                        </Button>
+                      </Form.Field>
+                    </Form.Field.Body>
                   </Form.Control>
                 </Form.Field>
               </Columns.Column>
