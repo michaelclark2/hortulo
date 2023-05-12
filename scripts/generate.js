@@ -42,7 +42,7 @@ async function main() {
   for (let index = 0; index < 10000; index++) {
     const body = generateHortulo(index + 1);
     const basePath = "metadata/";
-    const stream = fs.createWriteStream(basePath + String(index + 1) + ".json");
+    const stream = fs.createWriteStream(basePath + String(index) + ".json");
     stream.write(JSON.stringify(body));
     stream.on("finish", () => {
       console.log(body);
