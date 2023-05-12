@@ -58,4 +58,13 @@ describe("Hortulo", function () {
       ethers.utils.parseEther("1")
     );
   });
+
+  it("Should return list of tokenIds", async function () {
+    const mint = await hortulo
+      .connect(acc1)
+      .mint({ value: ethers.utils.parseEther("0") });
+    await mint.wait();
+
+    expect(await hortulo.tokensByOwner(acc1.address)).to.be.lengthOf(2);
+  });
 });
