@@ -1,10 +1,10 @@
-import { Columns, Container, Heading, Hero } from "react-bulma-components";
+import { Box, Columns, Container, Heading, Hero } from "react-bulma-components";
 import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import useContracts from "../hooks/contracts";
 import React, { useEffect, useState } from "react";
-import { formatEther } from "ethers/lib/utils.js";
-import HortuloImage from "../components/HortuloImage";
+import HortuloList from "../components/HortuloList";
+import { formatAddress } from "../utils";
 
 const GardenPage = (props) => {
   const { account } = useParams();
@@ -17,21 +17,21 @@ const GardenPage = (props) => {
     setTokens(results);
   }, [results]);
 
-  console.log(results);
-
   return (
     <Layout>
       <Hero size="fullheight">
-        <Hero.Header></Hero.Header>
-        <Hero.Body>
+        <Hero.Header mt={3}>
+          <Columns justifyContent="center">
+            <Columns.Column size="one-third">
+              <Box>
+                <Heading textAlign={"center"}>{formatAddress(account)}</Heading>
+              </Box>
+            </Columns.Column>
+          </Columns>
+        </Hero.Header>
+        <Hero.Body alignItems="start">
           <Container>
-            <Columns>
-              {results?.map((tokenId) => (
-                <Columns.Column>
-                  <HortuloImage tokenId={tokenId} />
-                </Columns.Column>
-              ))}
-            </Columns>
+            <HortuloList address={account} tokens={tokens} />
           </Container>
         </Hero.Body>
       </Hero>
