@@ -24,7 +24,7 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         IToucanPoolToken _natureCarbonPoolToken
     ) ERC721("Hortulo", "HORTULO") {
         setBaseURI(
-            "https://ipfs.io/ipfs/QmZd7KPShj34GaqzUNSLVgWF7AYkvgRdktwhoFF5uJ1FQr/"
+            "https://ipfs.io/ipfs/QmesztmN7S11hnCbhrWL17Vi2YkWu7BhopV7zDj7tmzbCk/"
         );
         natureCarbonPoolToken = IToucanPoolToken(_natureCarbonPoolToken);
     }
@@ -68,6 +68,17 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
             IToucanCarbonOffsets(tco2s[i]).retire(amounts[i]);
             retirements[_tokenId] += amounts[i];
         }
+    }
+
+    function tokensByOwner(
+        address _owner
+    ) public view returns (uint256[] memory) {
+        uint256 ownerTokenCount = balanceOf(_owner);
+        uint256[] memory tokenIds = new uint256[](ownerTokenCount);
+        for (uint i = 0; i < tokenIds.length; i++) {
+            tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
+        }
+        return tokenIds;
     }
 
     function setCost(uint256 _newCost) public onlyOwner {
