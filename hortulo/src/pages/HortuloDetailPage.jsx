@@ -1,10 +1,11 @@
-import { Box, Columns, Container, Hero } from "react-bulma-components";
+import { Box, Columns, Container, Heading, Hero } from "react-bulma-components";
 import Layout from "../components/Layout";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useContracts from "../hooks/contracts";
 import { useState } from "react";
 import Flower from "../components/Flower";
 import FlowerStem from "../components/FlowerStem";
+import { formatAddress } from "../utils";
 
 const HortuloDetailPage = (props) => {
   const { tokenId } = useParams();
@@ -17,6 +18,7 @@ const HortuloDetailPage = (props) => {
 
   const color = metadata?.attributes?.find((a) => a.trait_type === "color");
   const name = metadata?.name;
+  const owner = metadata?.owner;
   const retiredCarbonAmount = metadata?.retiredCarbonAmount;
 
   const height = (retiredCarbonAmount * 100) | 0;
@@ -25,11 +27,20 @@ const HortuloDetailPage = (props) => {
     <Layout>
       <Hero size="fullheight">
         <Hero.Header></Hero.Header>
-        <Hero.Body alignItems="start">
+        <Hero.Body alignItems="start" style={{ overflow: "hidden" }}>
           <Container>
             <Columns multiline={false} flexDirection="column">
               <Columns.Column>
-                <Box>{name}</Box>
+                <Box textAlign="center">
+                  <Heading>{name}</Heading>
+                  <p>
+                    Owned by{" "}
+                    <Link to={"/garden/" + owner}>{formatAddress(owner)}</Link>
+                  </p>
+                  <p>
+                    Retired {retiredCarbonAmount} tons of CO<sup>2</sup>
+                  </p>
+                </Box>
               </Columns.Column>
               <Columns.Column
                 display="flex"

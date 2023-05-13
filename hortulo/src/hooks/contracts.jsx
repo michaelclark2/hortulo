@@ -43,11 +43,18 @@ const useContracts = () => {
           functionName: "getRetiredCarbonAmount",
           args: [tokenId],
         },
+        {
+          address: Contracts.HORTULO_ADDRESS,
+          abi: HortuloABI.abi,
+          functionName: "ownerOf",
+          args: [tokenId],
+        },
       ],
     });
     const result = await fetch(data[0] + ".json");
     const metadata = await result.json();
     metadata["retiredCarbonAmount"] = formatEther(data[1]);
+    metadata["owner"] = data[2];
     return metadata;
   };
 
