@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import flower from "../assets/flower.svg";
 
-export const FlowerStem = ({ height }) => {
+export const FlowerStem = ({ width, height }) => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -9,11 +9,11 @@ export const FlowerStem = ({ height }) => {
       const ctx = canvasRef.current.getContext("2d");
       ctx?.reset();
       ctx.fillStyle = "green";
-      ctx?.fillRect(295, 0, 10, height);
+      ctx?.fillRect(width / 2 - 5, 0, 10, height);
     }
-  }, [height]);
+  }, [width, height]);
 
-  return <canvas ref={canvasRef} width="600" height={height} />;
+  return <canvas ref={canvasRef} width={width} height={height} />;
 };
 
 export default FlowerStem;

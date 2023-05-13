@@ -1,20 +1,51 @@
-import { Box, Columns, Container, Heading, Hero } from "react-bulma-components";
+import {
+  Box,
+  Button,
+  Columns,
+  Container,
+  Heading,
+  Hero,
+} from "react-bulma-components";
 import Layout from "../components/Layout";
 import { Link, useParams } from "react-router-dom";
 import useContracts from "../hooks/contracts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flower from "../components/Flower";
 import FlowerStem from "../components/FlowerStem";
 import { formatAddress } from "../utils";
+import { useAccount } from "wagmi";
+import AddCarbonForm from "../components/AddCarbonForm";
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
 
 const HortuloDetailPage = (props) => {
   const { tokenId } = useParams();
+  const { address } = useAccount();
   const { getTokenMetadata } = useContracts();
   const [metadata, setMetadata] = useState({});
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  const [isShowRetireCarbon, setIsShowRetireCarbon] = useState(false);
 
   getTokenMetadata(tokenId).then((data) => {
     setMetadata(data);
   });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const color = metadata?.attributes?.find((a) => a.trait_type === "color");
   const name = metadata?.name;
@@ -41,6 +72,11 @@ const HortuloDetailPage = (props) => {
                     Retired {retiredCarbonAmount} tons of CO<sup>2</sup>
                   </p>
                 </Box>
+                {owner?.toLowerCase() === address?.toLowerCase() ? (
+                  <Button color={"danger"} size={"large"}>
+                    Retire Carbon
+                  </Button>
+                ) : null}
               </Columns.Column>
               <Columns.Column
                 display="flex"
@@ -48,13 +84,30 @@ const HortuloDetailPage = (props) => {
                 alignItems="center"
                 justifyContent="end"
                 style={{
-                  height: height + 500,
+                  height: height + 400,
                   flexBasis: "unset",
                   overflow: "hidden",
                 }}
               >
-                <Flower height={100} width={600} color={color?.value} />
-                {height > 0 ? <FlowerStem height={height} /> : null}
+                <Flower
+                  height={100}
+                  width={
+                    windowDimensions?.width < 700
+                      ? windowDimensions?.width - 100
+                      : 600
+                  }
+                  color={color?.value}
+                />
+                {height > 0 ? (
+                  <FlowerStem
+                    width={
+                      windowDimensions?.width < 700
+                        ? windowDimensions?.width - 100
+                        : 600
+                    }
+                    height={height}
+                  />
+                ) : null}
               </Columns.Column>
             </Columns>
           </Container>
