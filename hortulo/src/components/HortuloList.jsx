@@ -1,5 +1,5 @@
 import { Box, Columns, Heading } from "react-bulma-components";
-import HortuloImage from "./HortuloImage";
+import HortuloCard from "./HortuloCard";
 
 const HortuloList = ({ tokens }) => {
   if (tokens.length === 0) {
@@ -13,9 +13,7 @@ const HortuloList = ({ tokens }) => {
     <Columns justifyContent="center">
       {tokens.map((tokenId) => (
         <Columns.Column size={"one-fifth"} key={tokenId}>
-          <Box>
-            <HortuloImage tokenId={tokenId} />
-          </Box>
+          <HortuloCard tokenId={tokenId} />
         </Columns.Column>
       ))}
     </Columns>
