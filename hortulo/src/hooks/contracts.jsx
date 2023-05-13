@@ -58,13 +58,6 @@ const useContracts = () => {
     return metadata;
   };
 
-  const { write: sendOffsetCarbon } = useContractWrite({
-    address: Contracts.HORTULO_ADDRESS,
-    abi: HortuloABI.abi,
-    functionName: "offsetCarbon",
-    args: ["tokenId", "amount"],
-  });
-
   const NCT = useContract({
     address: Contracts.TOUCAN_NATURE_CARBON_TOKEN,
     abi: ToucanPoolABI,
