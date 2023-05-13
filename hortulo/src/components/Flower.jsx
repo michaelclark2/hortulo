@@ -1,13 +1,13 @@
-const Flower = ({ className, color }) => {
+const Flower = ({ className, color, width, height }) => {
   return (
     <svg
       viewBox="0 0 55.217468 55.217468"
       version="1.1"
-      id="svg8"
       className={className}
+      width={width}
+      height={height}
     >
       <path
-        id="path258"
         fill={color}
         fillOpacity={1}
         fillRule="nonzero"
