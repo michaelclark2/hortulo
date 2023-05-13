@@ -77,9 +77,16 @@ const useContracts = () => {
 
   const checkAllowanceNCT = async () => {
     return await NCT.connect(signer).allowance(
-      Contracts.HORTULO_ADDRESS,
-      Contracts.TOUCAN_NATURE_CARBON_TOKEN
+      await signer.getAddress(),
+      Contracts.HORTULO_ADDRESS
     );
+  };
+
+  const getNCTTokenBalance = async () => {
+    const balance = await NCT.connect(signer).balanceOf(
+      await signer.getAddress()
+    );
+    return balance;
   };
 
   return {
@@ -88,6 +95,7 @@ const useContracts = () => {
     checkAllowanceNCT,
     tokensByOwner,
     getTokenMetadata,
+    getNCTTokenBalance,
   };
 };
 
