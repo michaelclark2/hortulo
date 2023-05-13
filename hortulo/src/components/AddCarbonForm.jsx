@@ -1,16 +1,17 @@
-import { Box, Button, Form, Icon, Image } from "react-bulma-components";
-import { useAccount } from "wagmi";
+import { Box, Button, Form, Icon } from "react-bulma-components";
+import { useContractWrite } from "wagmi";
 import useContracts from "../hooks/contracts";
 import { useState } from "react";
-import { formatEther } from "ethers/lib/utils.js";
+import { formatEther, parseEther } from "ethers/lib/utils.js";
 import NCTSymbol from "../assets/asset_NCT.png";
+import { Contracts } from "../utils/constants";
+import HortuloABI from "../contracts/Hortulo.json";
 
-const AddCarbonForm = ({ setIsShowForm }) => {
-  const { address } = useAccount();
+const AddCarbonForm = ({ setIsShowForm, tokenId }) => {
   const { getNCTTokenBalance, checkAllowanceNCT, approveNCT } = useContracts();
   const [NCTBalance, setNCTBalance] = useState(0);
   const [NCTAllowance, setNCTAllowance] = useState(0);
-  const [amountToRetire, setAmountToRetire] = useState("");
+  const [amountToRetire, setAmountToRetire] = useState("0");
   const [needsApproval, setNeedsApproval] = useState(true);
 
   getNCTTokenBalance().then((balance) => {
@@ -21,11 +22,18 @@ const AddCarbonForm = ({ setIsShowForm }) => {
     setNCTAllowance(formatEther(allowance));
   });
 
+  const { write: sendOffsetCarbon } = useContractWrite({
+    address: Contracts.HORTULO_ADDRESS,
+    abi: HortuloABI.abi,
+    functionName: "offsetCarbon",
+    args: [tokenId, parseEther(amountToRetire.toString() || "0")],
+  });
+
   const handleFormChange = (e) => {
     const amount = e.target.value * 1;
     setAmountToRetire(amount);
-    console.log(amount, NCTAllowance, NCTBalance);
-    if (amount <= NCTAllowance && amount > 0) {
+    console.log(amount, NCTAllowance * 1, NCTBalance);
+    if (amount <= NCTAllowance * 1 && amount > 0) {
       setNeedsApproval(false);
     } else {
       setNeedsApproval(true);
@@ -36,6 +44,11 @@ const AddCarbonForm = ({ setIsShowForm }) => {
     approveNCT(amountToRetire.toString()).then(() => {
       setNeedsApproval(false);
     });
+  };
+
+  const handleOffsetCarbon = (e) => {
+    sendOffsetCarbon();
+    setIsShowForm(false);
   };
 
   return (
@@ -65,14 +78,13 @@ const AddCarbonForm = ({ setIsShowForm }) => {
               Approve
             </Button>
           ) : (
-            <Button mr={2} color="danger">
+            <Button mr={2} color="danger" onClick={handleOffsetCarbon}>
               Confirm
             </Button>
           )}
           <Button color="warning" onClick={() => setIsShowForm(false)}>
             Cancel
           </Button>
-          <p>{NCTAllowance}</p>
         </Form.Control>
       </Form.Field>
     </Box>

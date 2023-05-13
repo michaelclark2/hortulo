@@ -77,13 +77,17 @@ const HortuloDetailPage = (props) => {
                   <Button
                     color={"danger"}
                     size={"large"}
+                    style={{ width: "100%" }}
                     onClick={(e) => setIsShowRetireCarbon(true)}
                   >
                     Retire Carbon
                   </Button>
                 ) : null}
                 {isShowRetireCarbon ? (
-                  <AddCarbonForm setIsShowForm={setIsShowRetireCarbon} />
+                  <AddCarbonForm
+                    setIsShowForm={setIsShowRetireCarbon}
+                    tokenId={tokenId}
+                  />
                 ) : null}
               </Columns.Column>
               <Columns.Column
