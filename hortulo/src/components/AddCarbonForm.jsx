@@ -1,5 +1,5 @@
 import { Box, Button, Form, Icon } from "react-bulma-components";
-import { useContractWrite } from "wagmi";
+import { useContractWrite, useNetwork } from "wagmi";
 import useContracts from "../hooks/contracts";
 import { useState } from "react";
 import { formatEther, parseEther } from "ethers/lib/utils.js";
@@ -9,6 +9,7 @@ import HortuloABI from "../contracts/Hortulo.json";
 
 const AddCarbonForm = ({ setIsShowForm, tokenId }) => {
   const { getNCTTokenBalance, checkAllowanceNCT, approveNCT } = useContracts();
+  const { chain } = useNetwork();
   const [NCTBalance, setNCTBalance] = useState(0);
   const [NCTAllowance, setNCTAllowance] = useState(0);
   const [amountToRetire, setAmountToRetire] = useState("0");
@@ -53,7 +54,6 @@ const AddCarbonForm = ({ setIsShowForm, tokenId }) => {
 
   return (
     <Box textAlign={"center"} m={"auto"}>
-      <small>{Math.round(NCTBalance)} NCT available</small>
       <Form.Field kind="addon">
         <Form.Control
           display="flex"
@@ -70,8 +70,21 @@ const AddCarbonForm = ({ setIsShowForm, tokenId }) => {
             mb={2}
             style={{ width: "4em" }}
           />
-          <Icon renderAs="img" src={NCTSymbol} />
+          <Icon renderAs="img" size={"medium"} src={NCTSymbol} />
         </Form.Control>
+        <small className="is-flex is-justify-content-center">
+          {Math.round(NCTBalance)} NCT available&nbsp;
+          <a
+            href={
+              chain.name === "Alfajores"
+                ? "https://faucet.toucan.earth"
+                : "https://app.ubeswap.org/#/swap?outputCurrency=0x02De4766C272abc10Bc88c220D214A26960a7e92"
+            }
+          >
+            Need more?
+          </a>
+        </small>
+        <small></small>
         <Form.Control>
           {needsApproval ? (
             <Button mr={2} color="danger" onClick={handleApproval}>
