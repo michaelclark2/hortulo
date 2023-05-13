@@ -1,7 +1,14 @@
-import { Box, Columns } from "react-bulma-components";
+import { Box, Columns, Heading } from "react-bulma-components";
 import HortuloImage from "./HortuloImage";
 
-const HortuloList = ({ tokens, address }) => {
+const HortuloList = ({ tokens }) => {
+  if (tokens.length === 0) {
+    return (
+      <Box textAlign={"center"}>
+        <Heading>This address does not hold any Hortulo.</Heading>
+      </Box>
+    );
+  }
   return (
     <Columns justifyContent="center">
       {tokens.map((tokenId) => (

@@ -31,7 +31,7 @@ const GardenPage = (props) => {
         </Hero.Header>
         <Hero.Body alignItems="start">
           <Container>
-            <HortuloList address={account} tokens={tokens} />
+            <HortuloList tokens={tokens} />
           </Container>
         </Hero.Body>
       </Hero>
