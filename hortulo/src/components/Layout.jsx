@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <>
       <Header />
-      <Container>{props.children}</Container>
+      <Container className="is-max-desktop">{props.children}</Container>
       <Footer />
     </>
   );

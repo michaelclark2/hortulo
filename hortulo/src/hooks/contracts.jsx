@@ -43,19 +43,37 @@ const useContracts = () => {
           functionName: "getRetiredCarbonAmount",
           args: [tokenId],
         },
+        {
+          address: Contracts.HORTULO_ADDRESS,
+          abi: HortuloABI.abi,
+          functionName: "ownerOf",
+          args: [tokenId],
+        },
       ],
     });
     const result = await fetch(data[0] + ".json");
     const metadata = await result.json();
     metadata["retiredCarbonAmount"] = formatEther(data[1]);
+    metadata["owner"] = data[2];
     return metadata;
   };
+
+  const { write: sendOffsetCarbon } = useContractWrite({
+    address: Contracts.HORTULO_ADDRESS,
+    abi: HortuloABI.abi,
+    functionName: "offsetCarbon",
+    args: ["tokenId", "amount"],
+  });
 
   const NCT = useContract({
     address: Contracts.TOUCAN_NATURE_CARBON_TOKEN,
     abi: ToucanPoolABI,
     signerOrProvider: signer,
   });
+
+  const offsetCarbon = async (tokenId, amount) => {
+    await sendOffsetCarbon({ args: [tokenId, amount] });
+  };
 
   const mint = async () => {
     await sendMint();
@@ -70,17 +88,26 @@ const useContracts = () => {
 
   const checkAllowanceNCT = async () => {
     return await NCT.connect(signer).allowance(
-      Contracts.HORTULO_ADDRESS,
-      Contracts.TOUCAN_NATURE_CARBON_TOKEN
+      await signer.getAddress(),
+      Contracts.HORTULO_ADDRESS
     );
+  };
+
+  const getNCTTokenBalance = async () => {
+    const balance = await NCT.connect(signer).balanceOf(
+      await signer.getAddress()
+    );
+    return balance;
   };
 
   return {
     mint,
+    offsetCarbon,
     approveNCT,
     checkAllowanceNCT,
     tokensByOwner,
     getTokenMetadata,
+    getNCTTokenBalance,
   };
 };
 
