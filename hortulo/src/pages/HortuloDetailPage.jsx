@@ -72,14 +72,23 @@ const HortuloDetailPage = (props) => {
                     Retired {retiredCarbonAmount} tons of CO<sup>2</sup>
                   </p>
                 </Box>
-                {owner?.toLowerCase() === address?.toLowerCase() ? (
-                  <Button color={"danger"} size={"large"}>
+                {owner?.toLowerCase() === address?.toLowerCase() &&
+                !isShowRetireCarbon ? (
+                  <Button
+                    color={"danger"}
+                    size={"large"}
+                    onClick={(e) => setIsShowRetireCarbon(true)}
+                  >
                     Retire Carbon
                   </Button>
                 ) : null}
+                {isShowRetireCarbon ? (
+                  <AddCarbonForm setIsShowForm={setIsShowRetireCarbon} />
+                ) : null}
               </Columns.Column>
               <Columns.Column
-                display="flex"
+                display={"flex"}
+                invisible={isShowRetireCarbon}
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="end"
