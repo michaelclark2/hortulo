@@ -5,6 +5,7 @@ import {
   Container,
   Heading,
   Hero,
+  Section,
 } from "react-bulma-components";
 import Layout from "../components/Layout";
 import useContracts from "../hooks/contracts";
@@ -56,9 +57,11 @@ const MintPage = (props) => {
                 </Card>
               </Columns.Column>
             </Columns>
-            <Heading textAlign={"center"} textColor="light" mb={4}>
-              Start offsetting your own carbon today!
-            </Heading>
+            <Section>
+              <Heading textAlign={"center"} textColor="light" mb={4}>
+                Start offsetting your own carbon today!
+              </Heading>
+            </Section>
           </Container>
         </Hero.Body>
       </Hero>
