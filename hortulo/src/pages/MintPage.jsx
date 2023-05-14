@@ -1,4 +1,11 @@
-import { Button, Card, Columns, Heading, Hero } from "react-bulma-components";
+import {
+  Button,
+  Card,
+  Columns,
+  Container,
+  Heading,
+  Hero,
+} from "react-bulma-components";
 import Layout from "../components/Layout";
 import useContracts from "../hooks/contracts";
 import Flower from "../components/Flower";
@@ -22,35 +29,37 @@ const MintPage = (props) => {
 
   return (
     <Layout>
-      <Hero>
+      <Hero size="fullheight">
         <Hero.Header>
           <Heading textAlign={"center"} textColor="light"></Heading>
         </Hero.Header>
         <Hero.Body>
-          <Columns justifyContent="center">
-            <Columns.Column className="is-half">
-              <Card backgroundColor="light">
-                <Card.Header></Card.Header>
-                <Card.Content textAlign={"center"}>
-                  <Flower className="rotate" color={flowerColor} />
-                </Card.Content>
-                <Card.Footer textAlign={"center"}>
-                  <Card.Footer.Item>
-                    <Button
-                      size={"large"}
-                      color={"danger"}
-                      onClick={() => mint()}
-                    >
-                      Mint
-                    </Button>
-                  </Card.Footer.Item>
-                </Card.Footer>
-              </Card>
-            </Columns.Column>
-          </Columns>
-          <Heading textAlign={"center"} textColor="light" mb={4}>
-            Start offsetting your own carbon today!
-          </Heading>
+          <Container>
+            <Columns justifyContent="center">
+              <Columns.Column className="is-half">
+                <Card backgroundColor="light">
+                  <Card.Header></Card.Header>
+                  <Card.Content textAlign={"center"}>
+                    <Flower className="rotate" color={flowerColor} />
+                  </Card.Content>
+                  <Card.Footer textAlign={"center"}>
+                    <Card.Footer.Item>
+                      <Button
+                        size={"large"}
+                        color={"danger"}
+                        onClick={() => mint()}
+                      >
+                        Mint
+                      </Button>
+                    </Card.Footer.Item>
+                  </Card.Footer>
+                </Card>
+              </Columns.Column>
+            </Columns>
+            <Heading textAlign={"center"} textColor="light" mb={4}>
+              Start offsetting your own carbon today!
+            </Heading>
+          </Container>
         </Hero.Body>
       </Hero>
     </Layout>
