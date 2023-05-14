@@ -57,10 +57,9 @@ const MintPage = (props) => {
                 </Card>
               </Columns.Column>
             </Columns>
-            <Section>
-              <Heading textAlign={"center"} textColor="light" mb={4}>
-                Start offsetting your own carbon today!
-              </Heading>
+            <Section textAlign={"center"}>
+              <Heading mb={4}>Start offsetting your own carbon today!</Heading>
+              <Heading>Only 1 CELO!</Heading>
             </Section>
           </Container>
         </Hero.Body>
