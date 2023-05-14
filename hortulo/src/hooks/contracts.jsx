@@ -17,6 +17,7 @@ const useContracts = () => {
     address: Contracts.HORTULO_ADDRESS,
     abi: HortuloABI.abi,
     functionName: "mint",
+    overrides: { gasLimit: 200000, value: parseEther("1") },
   });
 
   const tokensByOwner = (address) => {

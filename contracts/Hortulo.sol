@@ -15,7 +15,7 @@ contract Hortulo is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     string public baseURI;
-    uint256 public cost = 0 ether;
+    uint256 public cost = 1 ether;
     IToucanPoolToken public natureCarbonPoolToken;
     // tokenId => carbon tons
     mapping(uint256 => uint256) public retirements;
