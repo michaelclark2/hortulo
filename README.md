@@ -21,7 +21,7 @@ Hortulo encourages users to take an active role in reducing their carbon emissio
 
 1. Connect your wallet to Hortulo: Once you have a compatible wallet installed and set up, connect it to Hortulo by clicking the "Connect Wallet" button on the Hortulo website.
 
-1. Mint your flower NFT: Once you've connected your wallet to Hortulo, you can mint a random flower NFT. View your NFTs in the "My Garden" page. You can view each NFT in detail and use the interface to retire your NCT tokens.
+1. Mint your flower NFT: Once you've connected your wallet to Hortulo, you can mint a random flower NFT for 1 CELO. View your NFTs in the "My Garden" page. You can view each NFT in detail and use the interface to retire your NCT tokens.
 
 1. Use NCT to evolve your NFT: To evolve your flower NFT, you'll need to use [NCT tokens](https://blog.toucan.earth/announcing-nct-nature-carbon-tonne/), which are available from Toucan Protocol. You can purchase NCT from [Ubeswap](https://ubeswap.org/) or other sources and then use them to evolve your NFTs on Hortulo.
 
