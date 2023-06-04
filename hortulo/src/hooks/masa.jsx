@@ -5,9 +5,11 @@ export const useMasa = () => {
   const { data: signer } = useSigner();
   const { chain } = useNetwork();
 
-  const masa = new Masa({
-    signer: signer,
-    networkName: chain.name.toLowerCase(),
-  });
-  return masa;
+  if (signer) {
+    const masa = new Masa({
+      signer: signer,
+      networkName: chain.name.toLowerCase(),
+    });
+    return masa;
+  }
 };
