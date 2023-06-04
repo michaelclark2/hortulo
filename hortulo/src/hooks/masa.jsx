@@ -1,9 +1,13 @@
 import { Masa } from "@masa-finance/masa-sdk/dist/src/index";
-import { useSigner } from "wagmi";
+import { useNetwork, useSigner } from "wagmi";
 
 export const useMasa = () => {
   const { data: signer } = useSigner();
-  const masa = signer ? new Masa({ signer: signer }) : null;
+  const { chain } = useNetwork();
 
+  const masa = new Masa({
+    signer: signer,
+    networkName: chain.name.toLowerCase(),
+  });
   return masa;
 };
