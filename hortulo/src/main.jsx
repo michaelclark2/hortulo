@@ -6,7 +6,6 @@ import "bulma/css/bulma.min.css";
 import { WagmiConfig, createClient } from "wagmi";
 import { celo, celoAlfajores } from "wagmi/chains";
 import { ConnectKitProvider, getDefaultClient } from "connectkit";
-
 const alchemyId = import.meta.env.ALCHEMY_ID;
 
 const client = createClient(

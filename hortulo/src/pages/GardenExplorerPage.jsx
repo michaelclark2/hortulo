@@ -10,6 +10,7 @@ import Layout from "../components/Layout";
 import { useState } from "react";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
+import { useMasa } from "../hooks/masa";
 
 const GardenExplorerPage = (props) => {
   const [addressToSearch, setAddressToSearch] = useState("");
@@ -17,10 +18,22 @@ const GardenExplorerPage = (props) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const tryToNavigateToGarden = (e) => {
+  const masa = useMasa();
+
+  const tryToNavigateToGarden = async (e) => {
     if (!ethers.utils.isAddress(addressToSearch)) {
+      const address = await masa.soulName.resolve(addressToSearch);
+      if (address) {
+        navigate("/garden/" + address);
+        setHasError(false);
+        setError("");
+      } else {
+        setHasError(true);
+        setError(addressToSearch + " is not associated with an address!");
+        return;
+      }
       setHasError(true);
-      setError("Please enter a valid address");
+      setError("Please enter a valid address!");
       return;
     }
     navigate("/garden/" + addressToSearch);
