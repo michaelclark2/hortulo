@@ -21,6 +21,7 @@ const GardenExplorerPage = (props) => {
   const masa = useMasa();
 
   const tryToNavigateToGarden = async (e) => {
+    e.preventDefault();
     if (!ethers.utils.isAddress(addressToSearch)) {
       const address = await masa.soulName.resolve(addressToSearch);
       if (address) {
@@ -48,7 +49,11 @@ const GardenExplorerPage = (props) => {
           <Container>
             <Columns justifyContent="center">
               <Columns.Column size={"two-thirds"}>
-                <Form.Field kind="addon">
+                <Form.Field
+                  kind="addon"
+                  renderAs="form"
+                  onSubmit={tryToNavigateToGarden}
+                >
                   <Form.Control textAlign={"center"}>
                     <Form.Label size={"large"}>Search by Address</Form.Label>
                     {hasError ? (
@@ -74,9 +79,9 @@ const GardenExplorerPage = (props) => {
                       <Form.Field>
                         <Button
                           my={3}
+                          type="submit"
                           size={"large"}
                           color={"danger"}
-                          onClick={tryToNavigateToGarden}
                         >
                           Go
                         </Button>
