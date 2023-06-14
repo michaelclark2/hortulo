@@ -4,7 +4,7 @@ https://hortulo.world
 
 ## Description
 
-Hortulo is a NFT project that is designed to evolve and grow proportionally to the amount of carbon credits that the user retires on the platform.
+Hortulo is an NFT project that is designed to evolve and grow proportionally to the amount of carbon credits that the user retires on the platform.
 Hortulo encourages users to take an active role in reducing their carbon emissions and making a positive impact on the planet.
 
 ## Built On
