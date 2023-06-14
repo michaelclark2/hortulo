@@ -2,7 +2,7 @@ import { Masa } from "@masa-finance/masa-sdk/dist/src/index";
 import { providers } from "ethers";
 import { useAccount, useNetwork } from "wagmi";
 
-export const useMasa = async () => {
+export const useMasa = () => {
   const { isConnected } = useAccount();
   const { chain, chainId } = useNetwork();
 
