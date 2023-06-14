@@ -24,8 +24,10 @@ const GardenPage = (props) => {
       masa?.soulName.loadSoulNames(account),
       masa?.contracts.instances.SoulNameContract.extension(),
     ])
-      .then(([soulname, extension]) => {
-        setOwner(soulname + extension);
+      .then(([soulnames, extension]) => {
+        if (soulnames[0]) {
+          setOwner(soulnames[0] + extension);
+        }
       })
       .catch((err) => console.error(err));
   }, [results]);
