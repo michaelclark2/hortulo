@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@celo/contractkit": "^3.2.0",
-    "@masa-finance/masa-sdk": "^3.1.1",
+    "@masa-finance/masa-sdk": "^3.4.2",
     "connectkit": "^1.2.3",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
