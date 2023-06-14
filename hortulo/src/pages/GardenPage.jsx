@@ -5,16 +5,29 @@ import useContracts from "../hooks/contracts";
 import React, { useEffect, useState } from "react";
 import HortuloList from "../components/HortuloList";
 import { formatAddress } from "../utils";
+import { useMasa } from "../hooks/masa";
 
 const GardenPage = (props) => {
   const { account } = useParams();
   const { tokensByOwner } = useContracts();
   const [tokens, setTokens] = useState([]);
+  const [owner, setOwner] = useState("");
 
   const { data: results } = tokensByOwner(account);
 
+  const masa = useMasa();
+
   useEffect(() => {
     setTokens(results);
+    setOwner(formatAddress(account));
+    Promise.all([
+      masa?.soulName.loadSoulNames(account),
+      masa?.contracts.instances.SoulNameContract.extension(),
+    ])
+      .then(([soulname, extension]) => {
+        setOwner(soulname + extension);
+      })
+      .catch((err) => console.error(err));
   }, [results]);
 
   return (
@@ -24,7 +37,7 @@ const GardenPage = (props) => {
           <Columns justifyContent="center">
             <Columns.Column size="one-third">
               <Box>
-                <Heading textAlign={"center"}>{formatAddress(account)}</Heading>
+                <Heading textAlign={"center"}>{owner}</Heading>
               </Box>
             </Columns.Column>
           </Columns>
