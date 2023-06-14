@@ -4,7 +4,7 @@ https://hortulo.world
 
 ## Description
 
-Hortulo is a NFT project that is designed to evolve and grow proportionally to the amount of carbon credits that the user retires on the platform.
+Hortulo is an NFT project that is designed to evolve and grow proportionally to the amount of carbon credits that the user retires on the platform.
 Hortulo encourages users to take an active role in reducing their carbon emissions and making a positive impact on the planet.
 
 ## Built On
@@ -26,3 +26,10 @@ Hortulo encourages users to take an active role in reducing their carbon emissio
 1. Use NCT to evolve your NFT: To evolve your flower NFT, you'll need to use [NCT tokens](https://blog.toucan.earth/announcing-nct-nature-carbon-tonne/), which are available from Toucan Protocol. You can purchase NCT from [Ubeswap](https://ubeswap.org/) or other sources and then use them to evolve your NFTs on Hortulo.
 
 1. Watch your NFT grow: As you evolve your flower NFT with NCT, it will grow and develop in size and complexity, creating a tangible and visual representation of your environmental efforts.
+
+## Future improvements
+
+- Remove IPFS dependency and generate SVG graphics on-chain using NFT metadata
+- Allow staking Celo with NFTs using Spiral staking pools to retire carbon credits without risking capital
+- Enable users to deposit Celo to offset carbon credits by automating swap to NCT tokens
+- Display information about the credits that are retired from Toucan Protocol

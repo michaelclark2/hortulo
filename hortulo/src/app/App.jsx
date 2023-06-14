@@ -1,4 +1,3 @@
-import { useAccount } from "wagmi";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "../pages/HomePage";
@@ -16,7 +15,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { address, isConnecting, isDisconnected } = useAccount();
   return (
     <div className="App">
       <RouterProvider router={router} />
