@@ -1,14 +1,18 @@
 import { Masa } from "@masa-finance/masa-sdk/dist/src/index";
-import { useNetwork, useSigner } from "wagmi";
+import { providers } from "ethers";
+import { useAccount, useNetwork } from "wagmi";
 
-export const useMasa = () => {
-  const { data: signer } = useSigner();
-  const { chain } = useNetwork();
+export const useMasa = async () => {
+  const { isConnected } = useAccount();
+  const { chain, chainId } = useNetwork();
+
+  const provider = new providers.Web3Provider(window.celo || window.ethereum);
+  const signer = provider.getSigner();
 
   if (signer) {
     const masa = new Masa({
-      signer: signer,
-      networkName: chain.name.toLowerCase(),
+      signer,
+      networkName: isConnected ? chain.name.toLowerCase() : "alfajores",
     });
     return masa;
   }

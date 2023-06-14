@@ -11,19 +11,20 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 import { useMasa } from "../hooks/masa";
+import { useAccount } from "wagmi";
 
 const GardenExplorerPage = (props) => {
   const [addressToSearch, setAddressToSearch] = useState("");
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const { isConnected } = useAccount();
   const masa = useMasa();
 
   const tryToNavigateToGarden = async (e) => {
     e.preventDefault();
     if (!ethers.utils.isAddress(addressToSearch)) {
-      const address = await masa.soulName.resolve(addressToSearch);
+      const address = await masa?.soulName.resolve(addressToSearch);
       if (address) {
         navigate("/garden/" + address);
         setHasError(false);
@@ -55,7 +56,9 @@ const GardenExplorerPage = (props) => {
                   onSubmit={tryToNavigateToGarden}
                 >
                   <Form.Control textAlign={"center"}>
-                    <Form.Label size={"large"}>Search by Address</Form.Label>
+                    <Form.Label size={"large"}>
+                      Search by address {isConnected ? "or .celo soulname" : ""}
+                    </Form.Label>
                     {hasError ? (
                       <Message color={"danger"}>
                         <Message.Header></Message.Header>
@@ -66,7 +69,9 @@ const GardenExplorerPage = (props) => {
                     )}
                     <Form.Input
                       size={"large"}
-                      placeholder="0x1234...5678"
+                      placeholder={
+                        isConnected ? "username.celo" : "0x1234...5678"
+                      }
                       textAlign={"center"}
                       value={addressToSearch}
                       onChange={(e) => {
