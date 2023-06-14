@@ -1,12 +1,17 @@
 import { Masa } from "@masa-finance/masa-sdk/dist/src/index";
 import { providers } from "ethers";
 import { useAccount, useNetwork } from "wagmi";
+import { celoAlfajores } from "wagmi/chains";
 
 export const useMasa = () => {
   const { isConnected } = useAccount();
-  const { chain, chainId } = useNetwork();
+  const { chain } = useNetwork();
 
-  const provider = new providers.Web3Provider(window.celo || window.ethereum);
+  const provider = new providers.JsonRpcProvider(
+    chain
+      ? chain.rpcUrls.default.http[0]
+      : celoAlfajores.rpcUrls.default.http[0]
+  );
   const signer = provider.getSigner();
 
   if (signer) {

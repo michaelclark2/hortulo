@@ -11,14 +11,12 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
 import { useMasa } from "../hooks/masa";
-import { useAccount } from "wagmi";
 
 const GardenExplorerPage = (props) => {
   const [addressToSearch, setAddressToSearch] = useState("");
   const [hasError, setHasError] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { isConnected } = useAccount();
   const masa = useMasa();
 
   const tryToNavigateToGarden = async (e) => {
@@ -57,7 +55,7 @@ const GardenExplorerPage = (props) => {
                 >
                   <Form.Control textAlign={"center"}>
                     <Form.Label size={"large"}>
-                      Search by address {isConnected ? "or .celo soulname" : ""}
+                      Search by address or .celo soulname
                     </Form.Label>
                     {hasError ? (
                       <Message color={"danger"}>
@@ -69,9 +67,7 @@ const GardenExplorerPage = (props) => {
                     )}
                     <Form.Input
                       size={"large"}
-                      placeholder={
-                        isConnected ? "username.celo" : "0x1234...5678"
-                      }
+                      placeholder="username.celo"
                       textAlign={"center"}
                       value={addressToSearch}
                       onChange={(e) => {
